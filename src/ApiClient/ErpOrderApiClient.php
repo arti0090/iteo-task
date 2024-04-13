@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Processor;
+namespace App\ApiClient;
 
 use App\DTO\Order;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class ErpOrderProcessor implements OrderProcessorInterface
+class ErpOrderApiClient implements OrderApiClientInterface
 {
     const ERP_URL = 'URL';
 

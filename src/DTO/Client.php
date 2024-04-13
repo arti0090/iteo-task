@@ -2,12 +2,20 @@
 
 namespace App\DTO;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Client
 {
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
     private ?string $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
     private ?string $name = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Type('int')]
     private ?int $balance = null;
 
     public function __construct(
@@ -23,6 +31,13 @@ class Client
     public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId(string $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getName(): ?string

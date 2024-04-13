@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Processor;
+namespace App\ApiClient;
 
 use App\DTO\Order;
 
-interface OrderProcessorInterface
+interface OrderApiClientInterface
 {
     public function postOrder(Order $order): void;
 }

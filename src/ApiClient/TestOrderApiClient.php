@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Processor;
+namespace App\ApiClient;
 
 use App\DTO\Order;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-readonly class TestOrderProcessor implements OrderProcessorInterface
+readonly class TestOrderApiClient implements OrderApiClientInterface
 {
     public function __construct(
         private NormalizerInterface $normalizer

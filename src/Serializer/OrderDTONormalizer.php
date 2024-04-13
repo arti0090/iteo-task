@@ -5,17 +5,9 @@ namespace App\Serializer;
 use App\DTO\Order;
 use App\DTO\Product;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 readonly class OrderDTONormalizer implements DenormalizerInterface
 {
-    public function __construct(
-        #[Autowire(service: 'serializer.normalizer.object')]
-        private NormalizerInterface $normalizer,
-    ) {
-    }
-
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $orderDto = new Order();

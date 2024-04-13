@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Processor\OrderProcessorInterface;
+use App\ApiClient\OrderApiClientInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +15,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class OrderController extends AbstractController
 {
     #[Route('/order', name: 'app_order', methods: 'POST')]
-    public function index(
+    public function new(
         Request $request,
         SerializerInterface $serializer,
         ValidatorInterface $validator,
-        OrderProcessorInterface $orderProcessor,
+        OrderApiClientInterface $orderProcessor,
         ): JsonResponse {
         /** @var Order $order */
         $order = $serializer->deserialize($request->getContent(), Order::class, 'json');
