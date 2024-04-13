@@ -24,3 +24,9 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Provider\ClientDataProviderInterface:
         '@App\Provider\ClientDummyDataProvider'
+
+    App\Serializer\OrderDTONormalizer:
+        tags: [ 'serializer.normalizer' ]
+
+    App\Processor\OrderProcessorInterface:
+        '@App\Processor\TestOrderProcessor'

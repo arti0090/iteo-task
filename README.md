@@ -4,3 +4,5 @@
 
 TODO
 ClientCRMDataProvider - move URL to the env variable
+
+For more URL's it could be advisable to use multiple HTTPCLients - see https://symfony.com/doc/current/http_client.html#scoping-client
