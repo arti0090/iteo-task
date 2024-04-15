@@ -30,9 +30,8 @@ class ClientBalanceValidator extends ConstraintValidator
         if ($client->getBalance() < $orderTotal) {
             $this->context
                 ->buildViolation($constraint->message)
-                ->atPath('order.products')
+                ->atPath('products')
                 ->addViolation();
         }
-
     }
 }

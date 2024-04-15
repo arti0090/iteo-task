@@ -62,7 +62,6 @@ class ClientController extends AbstractController
 
         $clientApiClient->postClient($client);
 
-
         return $this->json([]);
     }
 }

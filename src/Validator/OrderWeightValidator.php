@@ -24,7 +24,7 @@ class OrderWeightValidator extends ConstraintValidator
         if ($totalWeight > self::MAX_WEIGHT) {
             $this->context
                 ->buildViolation($constraint->message)
-                ->atPath('order.products')
+                ->atPath('products')
                 ->addViolation();
         }
 
