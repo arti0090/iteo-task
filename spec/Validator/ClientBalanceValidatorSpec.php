@@ -2,6 +2,7 @@
 
 namespace spec\App\Validator;
 
+use App\ApiClient\ClientApiClientInterface;
 use App\DTO\Client;
 use App\DTO\Order;
 use App\DTO\Product;
@@ -16,9 +17,9 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class ClientBalanceValidatorSpec extends ObjectBehavior
 {
-    function let(ClientDataProviderInterface $clientDataProvider): void
+    function let(ClientApiClientInterface $clientApiClient): void
     {
-        $this->beConstructedWith($clientDataProvider);
+        $this->beConstructedWith($clientApiClient);
     }
 
     function it_is_initializable(): void
@@ -44,7 +45,7 @@ final class ClientBalanceValidatorSpec extends ObjectBehavior
     }
 
     function it_adds_violation_if_customer_has_not_enough_balance(
-        ClientDataProviderInterface $clientDataProvider,
+        ClientApiClientInterface $clientApiClient,
         Order $order,
         Client $client,
         Product $product,
@@ -55,7 +56,7 @@ final class ClientBalanceValidatorSpec extends ObjectBehavior
         $this->initialize($executionContext);
         $order->getClientId()->willReturn("any");
 
-        $clientDataProvider->findOneById("any")->willReturn($client);
+        $clientApiClient->findById("any")->willReturn($client);
         $client->getBalance()->willReturn(10);
 
         $product->getPrice()->willReturn(15);
@@ -69,7 +70,7 @@ final class ClientBalanceValidatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_when_balance_is_correct(
-        ClientDataProviderInterface $clientDataProvider,
+        ClientApiClientInterface $clientApiClient,
         Order $order,
         Client $client,
         Product $product,
@@ -78,7 +79,7 @@ final class ClientBalanceValidatorSpec extends ObjectBehavior
     ): void {
         $order->getClientId()->willReturn("any");
 
-        $clientDataProvider->findOneById("any")->willReturn($client);
+        $clientApiClient->findById("any")->willReturn($client);
         $client->getBalance()->willReturn(10);
 
         $product->getPrice()->willReturn(5);

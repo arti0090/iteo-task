@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class OrderController extends AbstractController
 {
-    #[Route('/order', name: 'app_order', methods: 'POST')]
+    #[Route('/order/new', name: 'app_order_new', methods: 'POST')]
     public function new(
         Request $request,
         SerializerInterface $serializer,
@@ -48,10 +48,10 @@ class OrderController extends AbstractController
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        $orderProcessor->postOrder($order);
+        $orderJson = $orderProcessor->postOrder($order);
 
         return $this->json(
-            $order,
+            $orderJson,
             Response::HTTP_CREATED,
         );
     }

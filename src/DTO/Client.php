@@ -6,8 +6,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Client
 {
-    #[Assert\NotBlank]
-    #[Assert\Type('string')]
     private ?string $id = null;
 
     #[Assert\NotBlank]
@@ -16,12 +14,13 @@ class Client
 
     #[Assert\NotBlank]
     #[Assert\Type('int')]
+    #[Assert\Positive]
     private ?int $balance = null;
 
     public function __construct(
-        string $id,
         string $name,
-        int $balance
+        int $balance,
+        string $id = null
     ) {
         $this->id = $id;
         $this->name = $name;

@@ -9,29 +9,26 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Provider\ClientDataProviderInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ClientController extends AbstractController
 {
-    #[Route('/client/{id}/balance', name: 'app_client_show', methods: 'GET')]
-    public function show(string $id, ClientDataProviderInterface $clientDataProvider): JsonResponse
+    #[Route('/client/{id}', name: 'app_client_show', methods: 'GET')]
+    public function show(string $id, ClientApiClientInterface $clientApiClient): JsonResponse
     {
-
-        $client = $clientDataProvider->findOneById($id);
+        $client = $clientApiClient->findById($id);
 
         if (!$client) {
             $response = new JsonResponse();
-            $response->setStatusCode(JsonResponse::HTTP_NOT_FOUND);
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
 
             return $response;
         }
 
-        return $this->json([
-            'clientId' => $client->getId(),
-            'balance' => $client->getBalance(),
-        ]);
+        return $this->json(
+            $client
+        );
     }
 
     #[Route('/client/new', name: 'app_client_new', methods: 'POST')]
@@ -60,8 +57,8 @@ class ClientController extends AbstractController
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        $clientApiClient->postClient($client);
+        $clientResponse = $clientApiClient->postClient($client);
 
-        return $this->json([]);
+        return $this->json($clientResponse, Response::HTTP_CREATED,);
     }
 }

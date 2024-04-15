@@ -26,8 +26,8 @@ services:
         tags: [ 'serializer.normalizer' ]
 
     # TODO change services to correct one when external ones are prepared
-    App\Provider\ClientDataProviderInterface:
-        '@App\Provider\ClientDummyDataProvider'
+    App\ApiClient\ClientApiClientInterface:
+        '@App\ApiClient\DummyClientApiClient'
 
-    App\Processor\OrderProcessorInterface:
-        '@App\Processor\TestOrderProcessor'
+    App\ApiClient\OrderApiClientInterface:
+        '@App\ApiClient\DummyOrderApiClient'

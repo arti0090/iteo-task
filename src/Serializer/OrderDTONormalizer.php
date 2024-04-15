@@ -6,12 +6,15 @@ use App\DTO\Order;
 use App\DTO\Product;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-readonly class OrderDTONormalizer implements DenormalizerInterface
+class OrderDTONormalizer implements DenormalizerInterface
 {
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $orderDto = new Order();
-        $orderDto->setId($data['orderId']);
+        if (isset($data['orderId'])) {
+            $orderDto->setId($data['orderId']);
+        }
+
         $orderDto->setClientId($data['clientId']);
 
         foreach ($data['products'] as $productData) {

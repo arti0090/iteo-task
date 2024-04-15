@@ -10,8 +10,6 @@ use Symfony\Component\Serializer\Annotation\SerializedName;
 #[AssertValidator\OrderWeight]
 class Order
 {
-    #[Assert\NotBlank]
-    #[Assert\Type('string')]
     #[SerializedName('orderId')]
     private ?string $id = null;
 
@@ -19,10 +17,10 @@ class Order
     #[Assert\Type('string')]
     private ?string $clientId = null;
 
-//    #[Assert\Count(
-//        min: 5,
-//        minMessage: 'Order needs at least 5 products',
-//    )]
+    #[Assert\Count(
+        min: 5,
+        minMessage: 'Order needs at least 5 products',
+    )]
     public array $products = [];
 
     public function __construct()
